@@ -1,4 +1,4 @@
-export const serviceUrl = "https://fullstackassign1.onrender.com";
+export const serviceUrl = "https://fullstackassign2ver8.onrender.com";
 
 export const maggie = {
     firstName: "Maggie",
@@ -84,3 +84,27 @@ export const maggieCredentials = {
     email: "maggie@simpson.com",
     password: "$2a$10$YsF8K8nLjfabI8bDqmbHHOau/.I2Wy6VOQSViizxWO0Qn0c5uYTBC",
 };
+
+export const hillwalkr = {
+    title: "Hillwalkr",
+    comment: "tough but fun walk",
+    rating: 3,
+};
+
+export const testReviews = [
+    {
+        title: "Skybridge",
+        comment: "very high",
+        rating: 1,
+    },
+    {
+        title: "Castle",
+        comment: "big and strong looking",
+        rating: 2,
+    },
+    {
+        title: "Clocktower",
+        comment: "very interesting",
+        rating: 4,
+    },
+];
