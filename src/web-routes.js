@@ -3,6 +3,7 @@ import { accountsController } from "./controllers/accounts-controller.js";
 import { dashboardController } from "./controllers/dashboard-controller.js";
 import { countryController } from "./controllers/country-controller.js";
 import { pointofinterestController } from "./controllers/pointofinterest-controller.js";
+import { reviewController } from "./controllers/review-controller.js";
 
 export const webRoutes = [
     { method: "GET", path: "/", config: accountsController.index },
@@ -27,4 +28,9 @@ export const webRoutes = [
     { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
     { method: "POST", path: "/country/{id}/uploadimage", config: countryController.uploadImage },
 
+    { method: "POST", path: "/country/{id}/addreview", config: countryController.addReview },
+    { method: "GET", path: "/country/{id}/deletereview/{reviewid}", config: countryController.deleteReview },
+
+    { method: "GET", path: "/review/{id}/editreview/{reviewid}", config:reviewController.index },
+    { method: "POST", path: "/review/{id}/updatereview/{reviewid}", config: reviewController.update },
 ];
