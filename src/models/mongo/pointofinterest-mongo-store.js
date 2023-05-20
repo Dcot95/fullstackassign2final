@@ -1,5 +1,6 @@
 import { Pointofinterest } from "./pointofinterest.js";
 import { Country } from "./country.js";
+import { Review } from "./review.js";
 
 export const pointofinterestMongoStore = {
     async getAllPointofinterests() {
@@ -47,4 +48,28 @@ export const pointofinterestMongoStore = {
         pointofinterest.longitude = updatedPointofinterest.longitude;
         await pointofinterest.save();
     },
+
+    async getReviewsByPointofinterestId(pointofinterestId) {
+        const pointofinterest = await Pointofinterest.findById(pointofinterestId);
+        return pointofinterest.reviews;
+    },
+
+    async addReviewByPointofinterestId(pointofinterestId, review) {
+        const pointofinterest = await Pointofinterest.findById(pointofinterestId);
+        pointofinterest.reviews.push(review);
+        await pointofinterest.save();
+    },
+
+    async deleteReviewByPointofinterestIdAndReviewId(
+        pointofinterestId,
+        reviewId
+    ) {
+        const pointofinterest = await Pointofinterest.findById(pointofinterestId);
+        pointofinterest.reviews = pointofinterest.reviews.filter(
+            (review) => review._id !== reviewId
+        );
+        await pointofinterest.save();
+    },
+
+
 };
