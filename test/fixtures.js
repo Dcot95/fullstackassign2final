@@ -4,7 +4,7 @@ export const maggie = {
     firstName: "Maggie",
     lastName: "Simpson",
     email: "maggie@simpson.com",
-    password: "reallytopsecret",
+    password: "$2a$10$YsF8K8nLjfabI8bDqmbHHOau/.I2Wy6VOQSViizxWO0Qn0c5uYTBC",
 };
 
 export const testUsers = [
@@ -12,19 +12,19 @@ export const testUsers = [
         firstName: "Homer",
         lastName: "Simpson",
         email: "homer@simpson.com",
-        password: "reallytopsecret",
+        password: "$2a$10$Pw4GIMUrXTqAR0JX1gUHUOAP463Nyhf.cbJDVpCGWwABpbBHmwZJi",
     },
     {
         firstName: "Marge",
         lastName: "Simpson",
         email: "marge@simpson.com",
-        password: "reallytopsecret",
+        password: "$2a$10$m50fUH2k.Z4r.Dd4OlBiCOnbkhMlP3rvzKvyFzs/A6TnnbF0uMoS.",
     },
     {
         firstName: "Bart",
         lastName: "Simpson",
         email: "bart@simpson.com",
-        password: "reallytopsecret",
+        password: "$2a$10$eOzIFnf7TM6NpTawH7gRnuwmyjwkpE.jKL8Q9XRXWWpgTBt6pC8DG",
     },
 ];
 
@@ -82,5 +82,5 @@ export const testPointofinterests = [
 
 export const maggieCredentials = {
     email: "maggie@simpson.com",
-    password: "reallytopsecret",
+    password: "$2a$10$YsF8K8nLjfabI8bDqmbHHOau/.I2Wy6VOQSViizxWO0Qn0c5uYTBC",
 };
