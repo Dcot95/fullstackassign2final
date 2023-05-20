@@ -1,5 +1,6 @@
 import { UserSpec, UserCredentialsSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
+import validator from 'validator';
 
 export const accountsController = {
     index: {
@@ -25,6 +26,8 @@ export const accountsController = {
         },
         handler: async function (request, h) {
             const user = request.payload;
+            user.email = validator.normalizeEmail(user.email);
+            user.password = validator.escape(user.password);
             await db.userStore.addUser(user);
             return h.redirect("/");
         },
@@ -46,8 +49,10 @@ export const accountsController = {
         },
         handler: async function (request, h) {
             const { email, password } = request.payload;
-            const user = await db.userStore.getUserByEmail(email);
-            if (!user || user.password !== password) {
+            const sanitizedEmail = validator.normalizeEmail(email);
+            const sanitizedPassword = validator.escape(password);
+            const user = await db.userStore.getUserByEmail(sanitizedEmail);
+            if (!user || user.password !== sanitizedPassword) {
                 return h.redirect("/");
             }
             request.cookieAuth.set({ id: user._id });
