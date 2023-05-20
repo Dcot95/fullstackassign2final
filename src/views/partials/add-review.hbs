@@ -1,0 +1,17 @@
+<form class="box" action="/country/{{country._id}}/addreview" method="POST">
+    <label>Enter Review Details:</label>
+    <div class="field is-horizontal">
+        <div class="field-body">
+            <div class="field">
+                <input class="input" type="text" placeholder="Enter Title" name="title">
+            </div>
+            <div class="field">
+                <input class="input" type="text" placeholder="Enter Comment" name="comment">
+            </div>
+            <div class="field">
+                <input class="input" type="text" placeholder="Enter Rating out of 5" name="rating">
+            </div>
+        </div>
+    </div>
+    <button class="button is-primary">Add Review</button>
+</form>

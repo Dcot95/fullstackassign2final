@@ -1,5 +1,6 @@
 import { Country } from "./country.js";
 import { pointofinterestMongoStore } from "./pointofinterest-mongo-store.js";
+import { reviewMongoStore } from "./review-mongo-store.js";
 
 export const countryMongoStore = {
     async getAllCountrys() {
@@ -12,6 +13,7 @@ export const countryMongoStore = {
             const country = await Country.findOne({ _id: id }).lean();
             if (country) {
                 country.pointofinterests = await pointofinterestMongoStore.getPointofinterestsByCountryId(country._id);
+                country.reviews = await reviewMongoStore.getReviewsByCountryId(country._id);
             }
             return country;
         }

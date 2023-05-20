@@ -1,3 +1,5 @@
+import {hillwalk} from "../../../test/fixtures.js";
+
 export const seedData = {
   users: {
     _model: "User",
@@ -35,6 +37,15 @@ export const seedData = {
       description: "stuff happens here",
       latitude: 2.4234,
       longitude: -3.4564,
+      countryid: "->countrys.ireland"
+    }
+  },
+  reviews: {
+    _model: "Review",
+    hillwalk: {
+      title: "Hillwalk",
+      comment: "tough but fun walk",
+      rating: 3,
       countryid: "->countrys.ireland"
     }
   }

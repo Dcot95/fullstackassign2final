@@ -1,4 +1,4 @@
-import { PointofinterestSpec } from "../models/joi-schemas.js";
+import { PointofinterestSpec, ReviewSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
 import { imageStore } from "../models/image-store.js";
 
@@ -64,6 +64,33 @@ export const countryController = {
             output: "data",
             maxBytes: 209715200,
             parse: true,
+        },
+    },
+    addReview: {
+        validate: {
+            payload: ReviewSpec,
+            options: { abortEarly: false },
+            failAction: function (request, h, error) {
+                return h.view("country-view", { title: "Add review error", errors: error.details }).takeover().code(400);
+            },
+        },
+        handler: async function (request, h) {
+            const country = await db.countryStore.getCountryById(request.params.id);
+            const newReview = {
+                title: request.payload.title,
+                comment: request.payload.comment,
+                rating: Number(request.payload.rating),
+            };
+            await db.reviewStore.addReview(country._id, newReview);
+            return h.redirect(`/country/${country._id}`);
+        },
+    },
+
+    deleteReview: {
+        handler: async function (request, h) {
+            const country = await db.countryStore.getCountryById(request.params.id);
+            await db.reviewStore.deleteReview(request.params.reviewid);
+            return h.redirect(`/country/${country._id}`);
         },
     },
 };
