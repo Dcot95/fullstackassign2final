@@ -60,3 +60,14 @@ export const JwtAuth = Joi.object()
         token: Joi.string().example("eyJhbGciOiJND.g5YmJisIjoiaGYwNTNjAOhE.gCWGmY5-YigQw0DCBo").required(),
     })
     .label("JwtAuth");
+
+export const ReviewSpec = Joi.object()
+    .keys({
+        title: Joi.string().required(),
+        rating: Joi.number().required().min(1).max(5),
+        description: Joi.string().required(),
+        userId: IdSpec,
+        pointofinterestId: IdSpec,
+    })
+    .label('Review');
+
