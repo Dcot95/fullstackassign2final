@@ -3,7 +3,6 @@ import { accountsController } from "./controllers/accounts-controller.js";
 import { dashboardController } from "./controllers/dashboard-controller.js";
 import { countryController } from "./controllers/country-controller.js";
 import { pointofinterestController } from "./controllers/pointofinterest-controller.js";
-import { Review } from "./models/mongo/review.js";
 
 export const webRoutes = [
     { method: "GET", path: "/", config: accountsController.index },
@@ -26,23 +25,6 @@ export const webRoutes = [
     { method: "GET", path: "/pointofinterest/{id}/editpointofinterest/{pointofinterestid}", config: pointofinterestController.index },
     { method: "POST", path: "/pointofinterest/{id}/updatepointofinterest/{pointofinterestid}", config: pointofinterestController.update },
     { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
-    {
-        method: "POST",
-        path: "/country/{countryId}/pointofinterest/{pointofinterestId}/reviews",
-        handler: async (request, h) => {
-            const { review } = request.payload;
-            const { countryId, pointofinterestId } = request.params;
-
-            // Save the review to the database and associate it with the point of interest
-            const savedReview = await Review.create({
-                text: review,
-                pointofinterest: pointofinterestId,
-            });
-
-            // Redirect back to the point of interest page
-            return h.redirect(`/country/${countryId}/pointofinterest/${pointofinterestId}`);
-        },
-    }
-
+    { method: "POST", path: "/country/{id}/uploadimage", config: countryController.uploadImage },
 
 ];

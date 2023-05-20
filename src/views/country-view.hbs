@@ -1,9 +1,15 @@
 {{> menu}}
 
-<section class="section">
-    <div class="title">
+<section class="section columns is-vcentered">
+    <div class="column has-text-centered">
+        <div class="title">
         {{country.title}}
     </div>
     {{> list-pointofinterests}}
     {{> add-pointofinterest}}
+    </div>
+    <div class="column">
+        {{> country-image }}
+    </div>
+</section>
 </section>

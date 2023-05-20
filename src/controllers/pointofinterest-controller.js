@@ -1,6 +1,5 @@
 import { PointofinterestSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
-import { Review } from "../models/mongo/review.js";
 
 export const pointofinterestController = {
     index: {
@@ -36,20 +35,5 @@ export const pointofinterestController = {
             await db.pointofinterestStore.updatePointofinterest(pointofinterest, newPointofinterest);
             return h.redirect(`/country/${request.params.id}`);
         },
-    },
-    addReview: {
-        handler: async function(request, h) {
-            const { review } = request.payload;
-            const { id, pointofinterestid } = request.params;
-
-            // Create a new review and associate it with the point of interest
-            const savedReview = await Review.create({
-                text: review,
-                pointofinterest: pointofinterestid,
-            });
-            await db.pointofinterestStore.addReview(pointofinterestid, savedReview);
-
-            return h.redirect(`/country/${id}/pointofinterest/${pointofinterestid}`);
-        }
     },
 };
