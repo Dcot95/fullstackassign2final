@@ -1,6 +1,6 @@
 import { PointofinterestSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
-import { Review } from "../models/mongo/review.js";
+import { imageStore } from "../models/image-store.js";
 
 export const countryController = {
     index: {
@@ -43,53 +43,27 @@ export const countryController = {
             return h.redirect(`/country/${country._id}`);
         },
     },
-
-    getPointofinterest: {
+    uploadImage: {
         handler: async function (request, h) {
-            const country = await db.countryStore.getCountryById(request.params.id);
-            const pointofinterest = await db.pointofinterestStore.getPointofinterestById(request.params.pointofinterestid);
-            const reviews = await db.reviewStore.getReviewsByPointofinterest(pointofinterest._id);
-            const viewData = {
-                title: "Point of Interest",
-                country: country,
-                pointofinterest: pointofinterest,
-                reviews: reviews,
-            };
-            return h.view("pointofinterest-view", viewData);
+            try {
+                const country = await db.countryStore.getCountryById(request.params.id);
+                const file = request.payload.imagefile;
+                if (Object.keys(file).length > 0) {
+                    const url = await imageStore.uploadImage(request.payload.imagefile);
+                    country.img = url;
+                    await db.countryStore.updateCountry(country);
+                }
+                return h.redirect(`/country/${country._id}`);
+            } catch (err) {
+                console.log(err);
+                return h.redirect(`/country/${country._id}`);
+            }
         },
-    },
-
-    addReview: {
-        handler: async function (request, h) {
-            const pointofinterestId = request.params.pointofinterestId;
-            const review = {
-                username: request.payload.username,
-                rating: request.payload.rating,
-                comment: request.payload.comment
-            };
-            await db.pointofinterestStore.addReviewByPointofinterestId(pointofinterestId, review);
-            return h.redirect(`/country/${request.params.countryId}/pointofinterest/${pointofinterestId}`);
-        }
-    },
-
-    deleteReview: {
-        handler: async function (request, h) {
-            const pointofinterestId = request.params.pointofinterestId;
-            const reviewId = request.params.reviewId;
-            await db.pointofinterestStore.deleteReviewByPointofinterestIdAndReviewId(pointofinterestId, reviewId);
-            return h.redirect(`/country/${request.params.countryId}/pointofinterest/${pointofinterestId}`);
-        }
-    },
-
-    listReviews: {
-        handler: async function (request, h) {
-            const pointofinterestId = request.params.pointofinterestId;
-            const reviews = await db.pointofinterestStore.getReviewsByPointofinterestId(pointofinterestId);
-            const viewData = {
-                title: "Reviews",
-                reviews: reviews
-            };
-            return h.view("reviews-view", viewData);
-        }
+        payload: {
+            multipart: true,
+            output: "data",
+            maxBytes: 209715200,
+            parse: true,
+        },
     },
 };
