@@ -10,6 +10,11 @@
     </div>
     <div class="column">
         {{> country-image }}
+        {{#if country.img}}
+            <form action="/country/{{country._id}}/deleteimage" method="post">
+                <button type="submit" class="button is-danger">Delete Image</button>
+            </form>
+        {{/if}}
     </div>
 </section>
 <section class="section">

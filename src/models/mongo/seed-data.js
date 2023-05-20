@@ -1,4 +1,3 @@
-import {hillwalk, hillwalkr} from "../../../test/fixtures.js";
 export const seedData = {
   users: {
     _model: "User",

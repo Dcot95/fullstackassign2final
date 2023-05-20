@@ -24,7 +24,7 @@ export const pointofinterestController = {
             },
         },
         handler: async function (request, h) {
-            const pointofinterest = await db.pointofinterestStore.getPointofinterestkById(request.params.pointofinterestid);
+            const pointofinterest = await db.pointofinterestStore.getPointofinterestById(request.params.pointofinterestid);
             const newPointofinterest = {
                 title: request.payload.title,
                 county: request.payload.county,

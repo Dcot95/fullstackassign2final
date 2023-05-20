@@ -27,6 +27,7 @@ export const webRoutes = [
     { method: "POST", path: "/pointofinterest/{id}/updatepointofinterest/{pointofinterestid}", config: pointofinterestController.update },
     { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
     { method: "POST", path: "/country/{id}/uploadimage", config: countryController.uploadImage },
+    { method: "POST", path: "/country/{id}/deleteimage", config: countryController.deleteImage },
 
     { method: "POST", path: "/country/{id}/addreview", config: countryController.addReview },
     { method: "GET", path: "/country/{id}/deletereview/{reviewid}", config: countryController.deleteReview },
