@@ -1,5 +1,4 @@
-import {hillwalk} from "../../../test/fixtures.js";
-
+import {hillwalk, hillwalkr} from "../../../test/fixtures.js";
 export const seedData = {
   users: {
     _model: "User",
@@ -42,8 +41,8 @@ export const seedData = {
   },
   reviews: {
     _model: "Review",
-    hillwalk: {
-      title: "Hillwalk",
+    hillwalkr: {
+      title: "Hillwalkr",
       comment: "tough but fun walk",
       rating: 3,
       countryid: "->countrys.ireland"
